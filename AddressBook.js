@@ -149,6 +149,14 @@ function editContact(firstName, lastName, property, newValue) {
     }
 }
 
+function deleteContact(firstName, lastName){
+    if(contactExists(firstName, lastName)){
+        addressBookArray = addressBookArray.filter((contact) => contact.firstName != firstName && contact.lastName != lastName);
+    }else{
+        console.log("Contact Does Not Exist");
+    }
+}
+
 try {
     addressBookArray.push(new Contact("Ashika", "Chadaga", "#3ac910", "Bangalore", "Karnataka", "560 043", "91 9481448524", "ashika@gmail.com"));
 } catch (e) {
@@ -163,6 +171,10 @@ try {
 
 console.log(addressBookArray);
 
-console.log("\nAfter Editing Contact")
+console.log("\nAfter Editing Contact");
 editContact("Ashika", "Chadaga", "city", "Kodagu");
+console.log(addressBookArray);
+
+console.log("\nAfter Deleting Contact");
+deleteContact("Ashika", "Chadaga");
 console.log(addressBookArray);
