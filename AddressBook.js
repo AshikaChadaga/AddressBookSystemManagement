@@ -114,6 +114,8 @@ class Contact {
 }
 
 let addressBookArray = new Array();
+let contactsCityMap = new Map();
+let contactsStateMap = new Map();
 
 function contactExists(firstName, lastName) {
     return addressBookArray.some(contact => contact.firstName == firstName && contact.lastName == lastName);
@@ -169,20 +171,32 @@ function getCountOfContacts(count) {
     return count;
 }
 
-function searchContactByCity(city) {
-    return addressBookArray.filter((contact) => contact.city == city);
-  }
+function searchContactByCity(firstName, city) {
+    return addressBookArray.filter((contact) => contact.city == city && contact.firstName == firstName);
+}
   
-function searchContactByState(state) {
+function searchContactByState(firstName, state) {
+    return addressBookArray.filter((contact) => contact.state == state && contact.firstName == firstName);
+}
+
+function viewContactsByCity(city){
+    return addressBookArray.filter((contact) => contact.city == city);
+}
+
+function viewContactsByState(state){
     return addressBookArray.filter((contact) => contact.state == state);
-  }
+}
 
 let firstContact = new Contact("Ashika", "Chadaga", "#3ac910", "Bangalore", "Karnataka", "560 043", "91 9481448524", "ashika@gmail.com");
 let secondContact = new Contact("Killua", "Zoldyk", "#6ac810", "KokuroMountain", "Japan", "234 567", "91 9898989897", "killua@gmail.com");
+let thirdContact = new Contact("Alexis", "Rose", "#8105bc", "SchittsCreek", "Canada", "550 864", "91 9485768574", "alexis@gmail.com");
+let fourthContact = new Contact("David", "Rose", "#8105bc", "SchittsCreek", "Canada", "550 864", "91 9465837465", "david@gmail.com");
 
 try {
     addressBookArray.push(firstContact);
     addressBookArray.push(secondContact);
+    addressBookArray.push(thirdContact);
+    addressBookArray.push(fourthContact);
 } catch (e) {
     console.error(e);
 }
@@ -209,8 +223,15 @@ try {
 }
 console.log(addressBookArray);
 
-console.log("\nSearch Contact By City");
-console.log(searchContactByCity("KokuroMountain"));
+console.log("\nSearch Killua In City - KokuroMountain");
+console.log(searchContactByCity("Killua", "KokuroMountain"));
 
-console.log("\nSearch Contact By State");
-console.log(searchContactByState("Japan"));
+console.log("\nSearch Killua In State - Japan");
+console.log(searchContactByState("Killua", "Japan"));
+
+
+console.log("\nView Contacts By City : SchittsCreek \n" );
+console.log(viewContactsByCity("SchittsCreek"));
+
+console.log("\nView Contacts By State : Canada \n" );
+console.log(viewContactsByState("Canada"));
